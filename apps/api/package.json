@@ -1,0 +1,40 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "watch": "tsc -w",
+    "start": "nodemon ./dist/index.js",
+    "dev": "concurrently \"npm run watch\" \"npm run start\"",
+    "generate": "npx prisma generate",
+    "migrate": "npx prisma migrate dev --schema=./prisma/schema.prisma"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^6.8.2",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-fileupload": "^1.5.1",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.1.10",
+    "socket.io": "^4.8.1",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.18",
+    "@types/express": "^5.0.2",
+    "@types/express-fileupload": "^1.5.1",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/node": "^22.15.18",
+    "@types/socket.io": "^3.0.2",
+    "concurrently": "^9.1.2",
+    "prisma": "^6.8.2",
+    "typescript": "^5.8.3"
+  }
+}
