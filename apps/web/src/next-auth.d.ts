@@ -1,3 +1,5 @@
+import { DefaultSession } from "next-auth";
+
 export type CustomUser = {
     id: string;
     email: string;
@@ -6,8 +8,6 @@ export type CustomUser = {
     image?: string | null;
     token?: string | null;
 };
-
-import { DefaultSession } from "next-auth";
 
 declare module "next-auth" {
 

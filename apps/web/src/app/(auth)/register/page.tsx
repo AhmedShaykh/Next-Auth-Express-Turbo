@@ -1,18 +1,7 @@
-import { auth } from "@/app/api/auth/[...nextauth]/auth";
-import Register from "@/Components/Register";
-import { redirect } from "next/navigation";
+import Register from "@/Components/Register";;
 import Link from "next/link";
 
-const RegisterPage = async () => {
-
-    const session = await auth();
-
-    if (session !== null) {
-
-        redirect("/dashboard");
-
-    }
-
+const RegisterPage = () => {
     return (
         <div className="flex justify-center items-center h-screen">
             <div className="w-full px-10 md:w-[550px] shadow-md rounded-xl py-5 bg-zinc-900/40">

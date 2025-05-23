@@ -1,3 +1,4 @@
+"use server";
 import { CHECK_CREDENTIALS_URL, REGISTER_URL } from "@/lib/apiEndPoints";
 import axios, { AxiosError } from "axios";
 

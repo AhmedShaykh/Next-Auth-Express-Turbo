@@ -1,6 +1,8 @@
-import express, { Application, Response, Request } from "express";
 import { createServer, Server as HttpServer } from "http";
+import ExpressFileUpoad from "express-fileupload";
 import { limiter } from "./config/rateLimit.js";
+import express, { Application } from "express";
+import { setupSocket } from "./socket.js";
 import routes from "./routing/index.js";
 import { Server } from "socket.io";;
 import helmet from "helmet";
@@ -21,11 +23,17 @@ const io = new Server(server, {
 
 export { io };
 
+setupSocket(io);
+
 app.use(cors());
 
 app.use(helmet());
 
 app.use(express.json());
+
+app.use(ExpressFileUpoad({
+    useTempFiles: true, tempFileDir: "/tmp/"
+}));
 
 app.use(express.urlencoded({ extended: false }));
 

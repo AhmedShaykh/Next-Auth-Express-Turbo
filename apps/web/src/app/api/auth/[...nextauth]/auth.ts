@@ -41,7 +41,7 @@ const authConfig: NextAuthConfig = {
                     label: "Password",
                     type: "password",
                     placeholder: "Enter Your Password"
-                },
+                }
             },
             async authorize(credentials) {
 
@@ -56,9 +56,7 @@ const authConfig: NextAuthConfig = {
                     if (user && user.id) {
 
                         return {
-                            ...user,
-                            email: user.email ?? "",
-                            emailVerified: user.emailVerified ?? null
+                            ...user, email: user.email ?? ""
                         } as CustomUser;
 
                     }

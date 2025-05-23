@@ -1,26 +1,42 @@
 import { auth } from "./app/api/auth/[...nextauth]/auth";
-import { NextResponse } from "next/server";
+import { authRoutes, publicRoutes } from "./lib/routes";
+import { NextRequest, NextResponse } from "next/server";
 
-let BASE_PATH = process.env.NEXTAUTH_URL;
+export async function middleware(req: NextRequest) {
 
-export default auth((req) => {
+    const { pathname } = req.nextUrl;
 
-    const reqUrl = new URL(req.url);
+    const session = await auth();
 
-    if (!req.auth && reqUrl?.pathname !== "/") {
+    const isPublicRoute = publicRoutes.includes(pathname);
 
-        return NextResponse.redirect(
-            new URL(`${BASE_PATH}/login?callbackUrl=${encodeURIComponent(reqUrl?.pathname)}`,
-                req.url
-            )
-        );
+    const isAuthRoute = authRoutes.includes(pathname);
+
+    if (isPublicRoute) {
+
+        if (session) {
+
+            return Response.redirect(new URL(`/dashboard`, req.url));
+
+        }
+
+        return null;
+    }
+
+    if (!session && isAuthRoute) {
+
+        return NextResponse.redirect(new URL("/login", req.url));
 
     }
-});
+
+};
 
 export const config = {
     matcher: [
+        "/login",
+        "/register",
         "/dashboard",
+        "/clash/:path*",
         "/clash/items/:path*"
     ]
 };
